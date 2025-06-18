@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mi Primer Programa en JavaScript</title>
+<style>
+  body {
+    background: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    background: white;
+    padding: 25px 35px 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #2a6ebb;
+    margin-bottom: 1rem;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 6px;
+    border: 1.8px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    border-color: #2a6ebb;
+    outline: none;
+  }
+  button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    background: #2a6ebb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #1f4d86;
+  }
+  .result {
+    margin-top: 25px;
+    background: #eaf2fb;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1f4d86;
+    line-height: 1.5;
+  }
+  .passed {
+    color: #2a9d8f;
+    font-weight: 700;
+  }
+  .failed {
+    color: #e76f51;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calculadora de notas DOM</h1>
+    <form id="formulario" onsubmit="calcularPromedios(event)">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" min="1" max="120" required />
+
+      <label for="trimestre">Trimestre:</label>
+      <select id="trimestre" name="trimestre" required>
+        <option value="" disabled selected>Seleccione trimestre</option>
+        <option value="1">1º Trimestre</option>
+        <option value="2">2º Trimestre</option>
+        <option value="3">3º Trimestre</option>
+        <option value="4">4º Trimestre</option>
+      </select>
+
+      <!-- Competencia 1 -->
+      <label for="competencia1">Competencia 1:</label>
+      <input type="text" id="competencia1" name="competencia1" required placeholder="Nombre competencia 1" />
+      <label>Notas de Competencia 1 (del 1.0 al 5.0):</label>
+      <input type="number" id="nota1_1" name="nota1_1" step="0.1" min="1" max="5" required placeholder="Nota 1" />
+      <input type="number" id="nota1_2" name="nota1_2" step="0.1" min="1" max="5" required placeholder="Nota 2" />
+      <input type="number" id="nota1_3" name="nota1_3" step="0.1" min="1" max="5" required placeholder="Nota 3" />
+
+      <!-- Competencia 2 -->
+      <label for="competencia2">Competencia 2:</label>
+      <input type="text" id="competencia2" name="competencia2" required placeholder="Nombre competencia 2" />
+      <label>Notas de Competencia 2 (del 1.0 al 5.0):</label>
+      <input type="number" id="nota2_1" name="nota2_1" step="0.1" min="1" max="5" required placeholder="Nota 1" />
+      <input type="number" id="nota2_2" name="nota2_2" step="0.1" min="1" max="5" required placeholder="Nota 2" />
+      <input type="number" id="nota2_3" name="nota2_3" step="0.1" min="1" max="5" required placeholder="Nota 3" />
+
+      <button type="submit">Calcular Promedios</button>
+    </form>
+
+    <div id="resultado" class="result" aria-live="polite"></div>
+  </div>
+
+  <script>
+    function calcularPromedios(event) {
+      event.preventDefault();
+
+      // Obtener datos
+      const nombre = document.getElementById('nombre').value.trim();
+      const edad = parseInt(document.getElementById('edad').value, 10);
+      const trimestre = document.getElementById('trimestre').value;
+
+      const competencia1 = document.getElementById('competencia1').value.trim();
+      const notasCompetencia1 = [
+        parseFloat(document.getElementById('nota1_1').value),
+        parseFloat(document.getElementById('nota1_2').value),
+        parseFloat(document.getElementById('nota1_3').value),
+      ];
+
+      const competencia2 = document.getElementById('competencia2').value.trim();
+      const notasCompetencia2 = [
+        parseFloat(document.getElementById('nota2_1').value),
+        parseFloat(document.getElementById('nota2_2').value),
+        parseFloat(document.getElementById('nota2_3').value),
+      ];
+
+      // Validar notas que estén entre 1.0 y 5.0
+      function validarNotas(notas) {
+        return notas.every(n => n >= 1.0 && n <= 5.0);
+      }
+      if (!validarNotas(notasCompetencia1) || !validarNotas(notasCompetencia2)) {
+        alert('Las notas deben estar entre 1.0 y 5.0');
+        return;
+      }
+
+      // Calcular promedio por competencia
+      function promedio(arr) {
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
+      }
+      const promedio1 = promedio(notasCompetencia1);
+      const promedio2 = promedio(notasCompetencia2);
+
+      // Determinar si aprobó cada competencia
+      const aprobacion1 = promedio1 >= 3.5 ? 'aprobó' : 'no aprobó';
+      const aprobacion2 = promedio2 >= 3.5 ? 'aprobó' : 'no aprobó';
+
+      // Promedio del trimestre
+      const promedioTrimestre = (promedio1 + promedio2) / 2;
+      const aprobacionTrimestre = promedioTrimestre >= 3.5 ? 'aprobó' : 'no aprobó';
+
+      // Mostrar resultados
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.innerHTML = `
+        <p><strong>Nombre:</strong> ${nombre}</p>
+        <p><strong>Edad:</strong> ${edad}</p>
+        <p><strong>Trimestre:</strong> ${trimestre}º</p>
+        <hr/>
+        <p><strong>${competencia1}:</strong> promedio = ${promedio1.toFixed(2)} -> <span class="${aprobacion1 === 'aprobó' ? 'passed' : 'failed'}">${aprobacion1}</span></p>
+        <p><strong>${competencia2}:</strong> promedio = ${promedio2.toFixed(2)} -> <span class="${aprobacion2 === 'aprobó' ? 'passed' : 'failed'}">${aprobacion2}</span></p>
+        <hr/>
+        <p><strong>Promedio Trimestre:</strong> ${promedioTrimestre.toFixed(2)} -> <span class="${aprobacionTrimestre === 'aprobó' ? 'passed' : 'failed'}">${aprobacionTrimestre}</span></p>
+      `;
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/icono.png" type="image-png">
+    
+</head>
+<style>
+form#formulario {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px 30px;
+    width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Etiquetas */
+form#formulario label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Campos de entrada */
+form#formulario input[type="number"],
+form#formulario input[type="text"] {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botón */
+form#formulario button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e293b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form#formulario button:hover {
+    background-color: #1c3aa9;
+}
+
+/* ======== TABLA DE RESULTADOS ======== */
+#resultados {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#resultados th {
+    background-color: #1e293b;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+#resultados td {
+    text-align: center;
+    padding: 10px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#resultados tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+    form#formulario {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #resultados {
+        width: 95%;
+        font-size: 0.9rem;
+    }
+}
+
+
+</style>
+<body>
+    <header>
+        <h1>Calculadora JS</h1>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="calculadora.html" >Calculadora</a>
+            <a href="calcularEdad.html" >Calcular Edad</a>
+            <a href="CalcularVenta.html" >Calcular Ventas</a>
+            <a href="CalcularVenta2.html" >Calcular Ventas Ocultar Form</a>
+            <a href="CalcularVenta3.html" >Calcular Ventas Tabla</a>
+        </nav>
+    </header>
+
+    <form id="formulario">
+ 
+        <label for="nombre">Nombre del producto:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="valor">Valor unitario:</label>
+        <input type="number" id="valor" required>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" required>
+
+        <label for="descuento">Descuento (%):</label>
+        <input type="number" id="descuento" required>
+
+        <button type="button" onclick="calcular()">Calcular Precio Total</button>
+    </form>
+    
+    <!-- Tabla para mostrar los resultados -->
+    <table id="resultados" border="1" style="margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Subtotal</th>
+                <th>IVA</th>
+                <th>Descuento</th>
+                <th>Total a Pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <script src="JS/calcularventas3.js"></script>
+
+
+   <footer>
+        Calculadora JS - BY Elizabeth
+    </footer>
+</body>
+
+</html>

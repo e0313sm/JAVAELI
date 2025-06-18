@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario de Registro con Validación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Formulario de Registro</h2>
+    <form id="registrationForm" novalidate>
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" />
+      <div class="error-message" id="nombreError"></div>
+
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido" />
+      <div class="error-message" id="apellidoError"></div>
+
+      <label for="edad">Edad</label>
+      <input type="number" id="edad" name="edad" placeholder="Ingrese su edad" />
+      <div class="error-message" id="edadError"></div>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="nombre@dominio.com" />
+      <div class="error-message" id="emailError"></div>
+
+      <div class="radio-group">
+        <label>Sexo:</label>
+        <label><input type="radio" name="sexo" value="masculino" /> Masculino</label>
+        <label><input type="radio" name="sexo" value="femenino" /> Femenino</label>
+        <div class="error-message" id="sexoError"></div>
+      </div>
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="Ingrese contraseña" />
+      <div class="error-message" id="passwordError"></div>
+
+      <label for="confirmPassword">Confirmar Contraseña</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme contraseña" />
+      <div class="error-message" id="confirmPasswordError"></div>
+
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+
+  <div id="successModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successDesc">
+    <div class="modal-content">
+      <h3 id="successTitle">Registro con éxito</h3>
+      <button id="closeModalBtn" aria-label="Cerrar mensaje de éxito">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const modal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    function isAlphanumeric(str) {
+      return /^[a-zA-Z0-9]+$/.test(str);
+    }
+
+    function validateEmail(email) {
+      // Simple RFC 5322 compliant regex for general email validation
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(email);
+    }
+
+    function showError(id, message) {
+      const el = document.getElementById(id);
+      el.textContent = message;
+    }
+
+    function clearErrors() {
+      const errors = document.querySelectorAll('.error-message');
+      errors.forEach(e => e.textContent = '');
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      clearErrors();
+
+      let hasError = false;
+
+      // Nombre
+      const nombre = form.nombre.value.trim();
+      if (!nombre) {
+        showError('nombreError', 'El campo Nombre es obligatorio.');
+        hasError = true;
+      } else if (nombre.length < 6 || nombre.length > 15) {
+        showError('nombreError', 'El Nombre debe tener entre 6 y 15 caracteres.');
+        hasError = true;
+      }
+
+      // Apellido
+      const apellido = form.apellido.value.trim();
+      if (!apellido) {
+        showError('apellidoError', 'El campo Apellido es obligatorio.');
+        hasError = true;
+      } else if (apellido.length < 6 || apellido.length > 15) {
+        showError('apellidoError', 'El Apellido debe tener entre 6 y 15 caracteres.');
+        hasError = true;
+      }
+
+      // Edad
+      const edad = form.edad.value.trim();
+      if (!edad) {
+        showError('edadError', 'El campo Edad es obligatorio.');
+        hasError = true;
+      } else {
+        const edadNum = Number(edad);
+        if (isNaN(edadNum)) {
+          showError('edadError', 'Edad debe ser un número válido.');
+          hasError = true;
+        } else if (edadNum < 18 || edadNum > 50) {
+          showError('edadError', 'La Edad debe estar entre 18 y 50 años.');
+          hasError = true;
+        }
+      }
+
+      // Email
+      const email = form.email.value.trim();
+      if (!email) {
+        showError('emailError', 'El campo Email es obligatorio.');
+        hasError = true;
+      } else if (!validateEmail(email)) {
+        showError('emailError', 'El Email no es válido.');
+        hasError = true;
+      }
+
+      // Sexo
+      const sexoOptions = form.sexo;
+      let sexoSelected = false;
+      for (let i = 0; i < sexoOptions.length; i++) {
+        if (sexoOptions[i].checked) {
+          sexoSelected = true;
+          break;
+        }
+      }
+      if (!sexoSelected) {
+        showError('sexoError', 'Seleccione una opción de Sexo.');
+        hasError = true;
+      }
+
+      // Contraseña
+      const password = form.password.value;
+      if (!password) {
+        showError('passwordError', 'El campo Contraseña es obligatorio.');
+        hasError = true;
+      } else if (password.length < 10) {
+        showError('passwordError', 'La Contraseña debe tener al menos 10 caracteres.');
+        hasError = true;
+      } else if (!isAlphanumeric(password)) {
+        showError('passwordError', 'La Contraseña debe contener solo caracteres alfanuméricos.');
+        hasError = true;
+      }
+
+      // Confirmar Contraseña
+      const confirmPassword = form.confirmPassword.value;
+      if (!confirmPassword) {
+        showError('confirmPasswordError', 'Confirme su contraseña.');
+        hasError = true;
+      } else if (confirmPassword !== password) {
+        showError('confirmPasswordError', 'Las contraseñas no coinciden.');
+        hasError = true;
+      }
+
+      if (!hasError) {
+        modal.classList.add('active');
+      }
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      form.reset();
+    });
+
+    // Accessibility: close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape" && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
+

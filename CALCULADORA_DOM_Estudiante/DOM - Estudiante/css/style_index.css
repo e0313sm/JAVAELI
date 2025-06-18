@@ -1,0 +1,51 @@
+
+/* Contenedor principal */
+.content-op {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+}
+.container-op, a{
+    text-decoration: none ;
+}
+
+/* Tarjetas */
+.container-op {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.container-op:hover {
+    transform: translateY(-5px);
+}
+
+/* Ícono */
+.icon {
+    background-color: #e2e8f0;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon svg {
+    width: 28px;
+    height: 28px;
+    color: #1e293b;
+}
+
+/* Título */
+.container-op h2 {
+    font-size: 1.1rem;
+    color: #1f2937;
+}

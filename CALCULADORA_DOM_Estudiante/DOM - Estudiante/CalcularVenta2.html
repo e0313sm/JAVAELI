@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/icono.png" type="image-png">
+    
+    <script src="/script.js"></script>
+</head>
+<style>
+
+/* Estilo general del formulario de ventas */
+form#formulario {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px 30px;
+    width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: Arial, sans-serif;
+}
+
+/* Etiquetas del formulario */
+form#formulario label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Campos de entrada */
+form#formulario input[type="number"],
+form#formulario input[type="text"] {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Inputs que serán deshabilitados (salida) */
+form#formulario input[disabled],
+form#formulario input:read-only {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+/* Botones */
+form#formulario button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e293b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+    width: 100%;
+}
+
+form#formulario button:hover {
+    background-color: #1c3aa9;
+}
+
+/* Área del resultado opcional */
+#resultado {
+    font-size: 1rem;
+    color: #0f172a;
+    font-weight: bold;
+    padding: 8px 0;
+    margin-top: 15px;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Calculadora JS</h1>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="calculadora.html" >Calculadora</a>
+            <a href="calcularEdad.html" >Calcular Edad</a>
+            <a href="CalcularVenta.html" >Calcular Ventas</a>
+            <a href="CalcularVenta2.html" >Calcular Ventas Ocultar Form</a>
+            <a href="CalcularVenta3.html" >Calcular Ventas Tabla</a>
+        </nav>
+    </header>
+ 
+    <form id="formulario">
+        <!-- div para dividir el formulario -->
+        <div id="formVenta">
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="valor">Valor unitario:</label>
+            <input type="number" id="valor" min="0" required>
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" min="1" required>
+            
+            <button type="button" onclick="calcular()">Calcular Precio Total</button>
+        </div>
+
+        <!-- Campos para mostrar los resultados -->
+        <div  id="resultado" style="display: none;">
+            <label for="subtotal">Subtotal:</label>
+            <input type="number" id="subtotal" readonly>
+            
+            <label for="iva">IVA (19%):</label>
+            <input type="number" id="iva" readonly>
+            
+            <label for="descuento">Descuento:</label>
+            <input type="number" id="descuento" readonly>
+            
+            <label for="total">Total a Pagar:</label>
+            <input type="number" id="total" readonly>
+        </div>
+    </form>
+    <script src="JS/calcularventas2.js"></script>
+
+    <footer>
+        Calculadora JS - BY Elizabeth
+</footer>
+</body>
+</html>

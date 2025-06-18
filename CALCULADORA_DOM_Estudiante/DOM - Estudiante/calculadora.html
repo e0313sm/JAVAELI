@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/icono.png" type="image-png">
+    <script type="text/javascript" src="calculadora.js"></script>
+</head>
+<style>
+    /* Estilo del formulario de calculadora */
+form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px 30px;
+    width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Etiquetas */
+form label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Entradas */
+form input[type="number"],
+form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form input[disabled] {
+    background-color: #f1f5f9;
+}
+
+/* Mensajes pequeños */
+form small {
+    color: #475569;
+    font-size: 0.875rem;
+}
+
+/* Botones */
+form button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e293b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #1c3aa9;
+}
+
+form button[type="reset"] {
+    background-color: #64748b;
+}
+
+form button[type="reset"]:hover {
+    background-color: #4b5563;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Calculadora JS</h1>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="calculadora.html" >Calculadora</a>
+            <a href="calcularEdad.html" >Calcular Edad</a>
+            <a href="CalcularVenta.html" >Calcular Ventas</a>
+            <a href="CalcularVenta2.html" >Calcular Ventas Ocultar Form</a>
+            <a href="CalcularVenta3.html" >Calcular Ventas Tabla</a>
+        </nav>
+    </header>
+   
+    <form action="">
+
+        <label for="">Ingresa un primer número: </label><br>
+        <input id="n1" type="number"  >
+        <label for="">Ingresa un segundo  número: </label><br>
+        <input id="n2" type="number">
+        <label for="">Resultado de la operacion es: </label><br> 
+        <input type="text" id="resultado1" disabled>
+        <small id="resultado2"></small>
+        <small id="resultado3"></small>
+        <button type="button" onclick="sumar()">Sumar</button>
+        <button type="button" onclick="restar()">Restar</button>
+        <button type="button" onclick="multiplicar()">Multiplicar</button>
+        <button type="button" onclick="dividir()">Dividir</button>
+        <button type="reset" >Limpiar calculadora</button>
+     
+    </form>
+    <script src="JS/calculadora.js"></script>
+
+    <footer>
+        Calculadora JS - BY Elizabeth
+</footer>
+</body>
+</html>
+
